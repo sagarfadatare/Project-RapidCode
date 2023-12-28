@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+        <link rel='shortcut icon' type='image/x-icon' href='images/logo-removebg-preview (1).png'/>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/style.css">
+         <link rel="stylesheet" href="js/codemirror-5.26.0/doc/docs.css">
+        <link rel="stylesheet" href="js/codemirror-5.26.0/lib/codemirror.css">
+        <link rel="stylesheet" href="js/codemirror-5.26.0/addon/hint/show-hint.css">
+        <script src="js/javascript.js"></script>
+
+        <script src="js/codemirror-5.26.0/lib/codemirror.js"></script>
+        <script src="js/codemirror-5.26.0/addon/hint/show-hint.js"></script>
+        <script src="js/codemirror-5.26.0/addon/hint/javascript-hint.js"></script>
+        <script src="js/codemirror-5.26.0/addon/hint/xml-hint.js"></script>
+        <script src="js/codemirror-5.26.0/addon/hint/html-hint.js"></script>
+        <script src="js/codemirror-5.26.0/mode/xml/xml.js"></script>
+        <script src="js/codemirror-5.26.0/mode/javascript/javascript.js"></script>
+        <script src="js/codemirror-5.26.0/mode/css/css.js"></script>
+        <script src="js/codemirror-5.26.0/mode/htmlmixed/htmlmixed.js"></script> 
+        <!-- Add this in the head section of your HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+<script src="https://kit.fontawesome.com/0e8205f9c0.js" crossorigin="anonymous"></script>
+
+
+    </head>
+    <body data-gr-c-s-loaded="true">
+       
+        <div id="header">
+            <img src="images/logo-removebg-preview (1).png"/>
+            <ul id="sidemenu">
+                <a href="#"> 
+                    <li><button id="downloadButton" style="border: none;">Download as Zip</button></li>
+                  <!-- <div class="arrowdown"></div>  -->
+                    </a>
+                 <a href="#">
+                    <li>Add library</li>
+                </a>
+                
+            </ul>
+        </div>
+        
+        <div style="clear:both"></div>
+        
+        <div id="centermenu">
+            <ul>
+                <li>
+                    <a class="toggle selected" href="#" style="border-radius: 5px 0 0 5px;">HTML</a>
+                </li>
+                <li>
+                    <a class="toggle" href="#">CSS</a>
+                </li>
+                <li>
+                    <a class="toggle" href="#">JavaScript</a>
+                </li>
+                <li>
+                    <a class="toggle selected" href="#" style="border-right: none; border-radius: 0 5px 5px 0;">Output</a>
+                </li>
+            <ul>
+        </div>
+        
+        <div style="clear:both"></div>
+        
+        <div id="rightmenu">
+            <ul>
+                <li><a href="logr.html" style="background-color: #FFEB3B ;padding: 7px">Login or Register</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Help</a></li>
+            <ul>
+        </div>
+        
+        <div style="clear:both"></div>
+        
+        <div id="HTMLcontainer" class="codecontainer activepart">
+            <div class="codelabel">HTML</div>
+            <div id="HTMLTextArea" tabindex="-1" style="background-color: white"></div>
+        </div>
+        <div id="CSScontainer" class="codecontainer activepart">
+            <div class="codelabel">CSS</div>
+            <div id="CSSTextArea" tabindex="-1"></div>
+        </div>
+        <div id="JavaScriptcontainer" class="codecontainer activepart">
+            <div class="codelabel">JavaScript</div>
+            <div id="JavaScriptTextArea" tabindex="-1"></div>
+        </div>
+        <div id="Outputcontainer" class="codecontainer">
+            <div class="codelabel" style="color: #7B7B7B; font-weight: bold;">Output</div>
+            <iframe class="iframe"></iframe>
+            <!-- <div class="overlay activepart" tabindex="-1"></div> -->
+        </div>
+        
+        <button id="run">Run with JS</button>
+                <!-- Add this before the closing </body> tag -->
+<script>
+    document.getElementById("downloadButton").addEventListener("click", function () {
+        // Create a new instance of JSZip
+        var zip = new JSZip();
+
+        // Add files to the zip
+        zip.file("html_code.html", document.getElementById("HTMLTextArea").textContent);
+        zip.file("css_code.css", document.getElementById("CSSTextArea").textContent);
+        zip.file("js_code.js", document.getElementById("JavaScriptTextArea").textContent);
+
+        // Generate the zip file asynchronously
+        zip.generateAsync({ type: "blob" })
+            .then(function (content) {
+                // Create a download link
+                var downloadLink = document.createElement("a");
+                downloadLink.href = URL.createObjectURL(content);
+                downloadLink.download = "code_files.zip";
+
+                // Append the link to the document and trigger the download
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+
+                // Remove the link from the document
+                document.body.removeChild(downloadLink);
+            });
+    });
+</script>
+
+
+    </body>
+    
+
+    
+</html>
